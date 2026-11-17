@@ -3,7 +3,6 @@ import os
 import sys
 import urllib.request
 import urllib.error
-import urllib.parse
 from http.server import BaseHTTPRequestHandler
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,36 +47,41 @@ class handler(BaseHTTPRequestHandler):
             system_prompt, user_prompt = build_prompt(profile, lang)
 
             gemini_api_key = os.environ.get("GEMINI_API_KEY", "").strip()
-            model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip()
+            model = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip()
             if not gemini_api_key:
                 return self._send(503, {
                     "error": "O Gemini ainda não foi configurado. Defina GEMINI_API_KEY nas variáveis da Vercel."
                 })
 
             payload = json.dumps({
-                "systemInstruction": {"parts": [{"text": system_prompt}]},
-                "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
-                "generationConfig": {
+                "model": model,
+                "system_instruction": system_prompt,
+                "input": user_prompt,
+                "generation_config": {
                     "temperature": 0.75,
-                    "maxOutputTokens": 2800
-                }
+                    "max_output_tokens": 2800
+                },
+                "store": False
             }).encode("utf-8")
-            endpoint = (
-                "https://generativelanguage.googleapis.com/v1beta/models/"
-                + model + ":generateContent?key=" + urllib.parse.quote(gemini_api_key, safe="")
-            )
+            endpoint = "https://generativelanguage.googleapis.com/v1beta/interactions"
             req = urllib.request.Request(
                 endpoint, data=payload, method="POST",
-                headers={"Content-Type": "application/json"}
+                headers={
+                    "Content-Type": "application/json",
+                    "x-goog-api-key": gemini_api_key
+                }
             )
             with urllib.request.urlopen(req, timeout=240) as response:
                 result = json.loads(response.read().decode("utf-8"))
 
-            candidates = result.get("candidates", [])
-            parts = candidates[0].get("content", {}).get("parts", []) if candidates else []
-            review = "\n".join(
-                part.get("text", "") for part in parts if part.get("text")
-            ).strip()
+            # Interactions API: texto final fica em steps[].content[].text
+            review_parts = []
+            for step in result.get("steps", []):
+                if step.get("type") == "model_output":
+                    for item in step.get("content", []):
+                        if item.get("type") == "text" and item.get("text"):
+                            review_parts.append(item["text"])
+            review = "\n".join(review_parts).strip()
             if not review:
                 feedback = candidates[0].get("finishReason", "sem detalhes") if candidates else "sem candidatos"
                 return self._send(502, {
@@ -99,6 +103,8 @@ class handler(BaseHTTPRequestHandler):
                 message = "O Gemini recusou a chave ou o acesso ao modelo. Confira GEMINI_API_KEY e o projeto no Google AI Studio."
             elif exc.code == 400:
                 message = "O Gemini rejeitou a solicitação. Verifique o modelo e os dados enviados."
+            elif exc.code == 404:
+                message = "Modelo Gemini não encontrado ou indisponível. Confira GEMINI_MODEL; o padrão desta versão é gemini-3.8-flash."
             else:
                 message = "Erro ao consultar o Gemini: HTTP %s — %s" % (exc.code, detail)
             return self._send(502, {"error": message})
