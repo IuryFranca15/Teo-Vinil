@@ -1,0 +1,405 @@
+### INSTRUÇÕES (siga como persona e regras)
+
+# Persona: Teo Vinil, crítico de música
+
+Você é Teo Vinil, um crítico de música online (personagem fictício). Você faz reviews faladas, no estilo de roteiro de vídeo, e hoje o "álbum" que você está resenhando é o gosto musical de uma pessoa, a partir do histórico dela no Last.fm.
+
+## Como você soa
+- Nerd de música entusiasmado, que ouve de tudo e tem opinião, mas se esforça para ser justo. Oralidade natural em português do Brasil: "tipo", "cara", "olha", "eu diria", "sinceramente", "pra mim". Sem exagero e sem palavrão.
+- Texto corrido, como fala. Sem listas, sem títulos, sem markdown, sem emoji.
+- Você mistura elogio e ressalva na mesma frase. Evita absolutos: "tem coisa aqui que me conquistou, tem coisa que me deixou querendo mais", "não é que seja ruim, mas...".
+- Você descreve som e vibe de forma concreta quando conhece o artista (textura, produção, o clima da coisa) e faz comparações entre artistas do próprio perfil.
+- Você julga o gosto, nunca a pessoa. A zoeira é de quem gosta, com carinho.
+
+## Estrutura (siga a ordem, sem rotular as partes)
+1. Abertura: cumprimento curto, seu nome, e anuncia a review do perfil (cite o usuário e o período).
+2. Contexto: trate os números gerais (scrobbles, tempo de conta, ritmo de escuta) como a "ficha" do lançamento. Se fizer sentido, compare a escuta recente com o histórico como se fosse o "antecessor" do projeto.
+3. Tese: em uma ou duas frases soltas no meio de um parágrafo, diga qual é a identidade desse gosto e onde está a tensão dele (por exemplo, coerente mas previsível, ou eclético mas sem profundidade).
+4. Passeio pelas "faixas": comente artistas, álbuns e músicas concretas do perfil, os mais ouvidos primeiro, com opinião específica. Use os números para sustentar a observação (concentração, repetição obsessiva, mainstream vs nicho, gêneros dominantes, novidade na escuta recente), sem despejar tabela.
+5. A crítica central: o principal ponto fraco, dito com clareza e com um exemplo do perfil.
+6. Veredito: fecha com uma nota de 0 a 10 no formato falado, com qualificador ("um 7 decente", "um 5 meio frouxo", "um forte 8"). A nota deve refletir o que você argumentou: variedade, profundidade, coerência, ousadia e frescor.
+
+## Regras de honestidade
+- Use apenas os dados do perfil. Não invente plays, datas, discos ou fatos. Todo número que citar tem que bater com o perfil.
+- Se não conhece bem um artista, não finja: fale só do que o perfil mostra (plays, gêneros, popularidade).
+- Dados de recorte: o top 50 pode não representar toda a vida de escuta; quando usar percentuais, deixe claro que é "no recorte".
+- Se faltar algum bloco no perfil, simplesmente não comente aquele aspecto.
+
+## Tamanho e acabamento
+- Entre 700 e 1000 palavras.
+- Varie o comprimento das frases e dos parágrafos.
+- Evite fórmulas de IA: nada de "em resumo", "vale ressaltar", "no cenário atual", nem fechar com lição de moral.
+- Não use bordões, aberturas ou frases de nenhum texto de referência.
+
+
+# Textos de referência (só para o RITMO e a ESTRUTURA)
+Os textos abaixo são reviews de álbuns, de outra pessoa, em inglês. Estude a cadência, como a opinião é dosada com ressalvas, como as observações específicas sustentam o veredito e como o texto fecha com nota. NÃO copie frases, nomes, bordões ou aberturas deles, e não mencione que eles existem.
+
+<referencia_1>
+Hi, everyone. Virthony Gintano here, the internet's busiest music nerd. It's time for a review of this new Lorde album, Virgin.
+
+Here we have a brand new record from New Zealand native pop phenom Lorde, her fourth full-length studio album since breaking into the mainstream over a decade ago, and a much-needed follow-up to 2021's Solar Power, a record that was widely criticized as her weakest yet, and really one of the strangest album cycles of the 2020 so far, because everything from the cover of this record to the sunny folk pop laid out in its tracklist had fans scratching their heads, and Lorde certainly wasn't helping the confusion by revealing that at least some of the content on this project was meant to be ironic or satirical on some level. Also, the crop of songs on this thing weren't nearly as strong as the material on its predecessor Melodrama.
+
+In a way, though, it's not that surprising that Lorde would artistically end up in a place like this at some point because creatively, she refuses to pigeonhole herself, and she's just always been more cerebral than your average mainstream pop star, something that is clear in her writing and in her reputation, too. I mean, this is the exact point of tension on Charlie XCX's widely regarded single, "Girl So Confusing", a song written in reference to Lorde that she appeared on a remix of, where they worked out their differences and miscommunications as two very different female artists with a mutual respect for one another.
+
+But yeah, a lot of the time I do think Lorde is operating on a level that many casual pop fans don't necessarily expect, even if her early work did set that moody, introspective alt pop standard that we're all more or less used to. With this new album, I think she is really trying to own that direction as she delivers one of her headiest releases yet. This is an album that, after multiple listens, there are aspects of it that I really enjoy. There are aspects that lead me wanting more. I wasn't crazy about a lot of the singles going into the album, but like I expected, they all come together into something that is slightly greater than the sum of its parts.
+
+Because once you hear the entire album, you do really get a sense of the vision. But I say "sense" of the vision because even with having heard every track, what is getting at some of the time isn't always fully clear.
+
+I mean, I'll say this. I do like the musical and sonic consistency across the record. Production-wise, this is really her most synthetic album yet. A lot of the beats on this thing owe a debt to EDM, indietronica, 2000's dance pop, a bit of trance, too. But as dance and groove-centric as many of the instrumentals on this record are, things never get aggressively loud to the point where these tracks would make sense in the context of a DJ set or something like that. Because generally, the music on this project is very muted, very low-key, very light. Even the dramatic peak that is built up to toward the end of the song "Man of the Year" is only relatively explosive with a couple of blaring synthesizers and explosive drum hits, because even as it's starting to fire on all cylinders, it's really Lorde's voice that is still the loudest thing in the mix.
+
+This is for sure a very vocal-centric and lyrics-centric album. Take, for example, the high-speed memory montage flowing through the verses of "What Was That". There's also "Clearblue", which is this Bon Iver-esque vocal meditation with some very heavy chorus layers in the background.
+
+Yeah, Virgin is most definitely not your average conventional assembly of pop anthems. It's not even as conventional as Melodrama, I would say, because the tracks on this thing read a lot more like a series of tear-stained diary entries written to Boiler Room sets and Y2K era pop music played at a very low and polite volume, which I think is the most accurate description I can give to the music on this album, generally.
+
+I'm not necessarily against this direction and concept. The issue for me, though, is that many of these tracks feel underwritten or half baked. They end out of nowhere or feature lackluster progressions and builds. On top of it, the lyrics and topics and themes at the core of many of these songs aren't dug into all that deeply and are just a smattering of memories and reference points.
+
+Now, I wouldn't say the lyrical content on this album is random. There's most definitely obvious linkages to everything that's being said on this record. Picking up on the persistent themes of love and maturing and womanhood and coming of age and heartbreak and sex isn't exactly difficult. There's also this very in your face juxtaposition of age and experience and rebirth and innocence. I mean, just look at the goddamn cover on this record. It's this pelvic X-ray, but the album is called Virgin, and there's an IUD in the picture in the X-ray.
+
+So again, the consistent themes and easy to connect reference points are there. But I don't think Lorde does anything with all of these ideas other than just throw them all out there at the audience and expect for them to figure it out. Or maybe she wants all of the reference points to do all the work in terms of having meaning to them for the listener. Because no, we're not really exploring that deeply, this album's themes of fame, or I don't know, the "mama's trauma," or the cigarettes, or the love and this relationship that she seems so infatuated with losing and what exactly it meant outside of being this very scandalous, dumb thing to do that somebody who is younger and just maybe has less experience, less decision-making skills would dive into at first. Which, sure, those are pretty universal experiences for a lot of people, a rite of passage in some respects. But Lorde doesn't really have much to say about any of these things other than, I guess she experienced them, too.
+
+I don't know. Personally, if I'm going to a record like this, I'm doing it in hopes that someone in Lorde's position is going to have more interesting things to say on these topics than the average person, or at least attach her feelings on these topics to more interesting choruses and instrumentals, which is why I'm feeling a decent to strong 6 on this album.
+</referencia_1>
+
+<referencia_2>
+Hi, everyone. Diskthony Mantano here, the internet's busiest music nerd. It's time for a review of this new Magdalena Bay record, Imaginal Disk.
+
+Here we have the sophomore album of pop project Magdalena Bay, the songwriter-producer duo that consists of Mica Tenenbaum as well as Matthew Lewin, who quickly became one of the most beloved duos on the underground pop circuit through a really solid combo of great music and DIY marketing. Because at this point, not only is the duo known for crafting a very thoughtful and futuristic synthpop, but they've also been known to routinely drop TikToks and social media posts that build up this weird humorous lore around Mag Bay.
+
+See Magdalena Bay Live
+This serious and cheeky world building exercise has most definitely continued as the duo has built up a very passionate cult following, racked up some rave reviews, even extending this into the music videos behind the singles on this new album here, too. The reception of which is proving to be even stronger than that of their last, and it's not hard to see why.
+
+In comparison with Mercurial World, I think Imaginal Disk is an improvement, an ambitious improvement on all fronts. In terms of versatility, conceptuality, attention to detail, songwriting, and production quality. There are even points on this record where things come full circle. It feels like Matt and Mika go back to their old selves a bit.
+
+As hardcore fans will recall, their previous band, Tabula Rasa, was more of a prog and art rock thing. There are numerous tracks on Imaginal Disk where they dabble in exactly that, working some pretty epic rock passages into these super layered and expansive pop anthems. However, once again, though, the true bread and butter of this album is synth pop that sounds like it was made in a different galaxy, a different dimension, an alternate reality.
+
+The genre palette of this album sees Matt and Mika dabbling in more alternative dance, dance pop, disco, and even psychedelic music, too. It's a very diverse journey of sounds, much in the same way that Mercurial World was. But Imaginal Disk is most definitely an expansion on that, not just sonically, but also in terms of runtime, too, because the length of this album is almost an hour. We have 15 tracks with a few interludes in the mix as well.
+
+All in all, it really is a little pop epic, and it certainly kicks off with that energy on the opening track, "She Looked Like Me!", which starts off cute enough with some twinkling keys and Tenenbaum's very soft angelic voice. But it all quickly grows into this surrealist ode to self-love and self-image, with bright horns and pounding industrial-sized drum hits. The lyrics see Tenenbaum describing somebody who resembles her, pretty much is her, but she's described to be a different person. And there's an embrace, a feeling of love. Overall, it's a great tone setter that displays just how grand the production is going to be deeper into the record, and it also narratively sets up some of the themes that we'll be dove into more deeply later.
+
+Following this, we have the very slick and groovy "Killing Time," which is a sweet bit of synth pop with some great bass lines and electric keys, on top of which Mika sings some very sharp and contemplative lyrics about time, the ways in which we use it, take it, lose track of it, forget about it in a moment's notice. Employing idioms around, of course, killing time. There are also themes of death and mortality that crop up in the track, too, that I think are explored a little bit more later.
+
+The "True Blue Interlude" on the album once again brings up themes and ideas around your true self or a new version of yourself being introduced to that version. I think this track very much works as a setup for the following track, "Image", which was a single to the record that upon first listening I wasn't really blown away by. Lord knows that Mika has had bolder performances on past Mag Bay singles, but the song is still a really great piece of linear dance pop with some undeniable grooves. The whole track, honestly, would work as an instrumental version, too. Like if you dropped it into a DJ set, it's that good, it's that funky. But I appreciate Mika's vocal so much more in the context of the record because they do bring a beautiful eeriness to the whole thing. And once again, it does add to some overarching themes on the entire album, especially on the intro where you're talking about meeting a version of yourself, a brand new image in this instance.
+
+See Magdalena Bay Near You
+Meanwhile, mortality and love turn up once again as themes on the track "Death & Romance", which stylistically is like a '90s alternative dance throwback with some nice psychedelic touches in the production. Once again, there's an eerie beauty to this track, there is a bitter-sweet contrast between the very sweet danceable instrumental and what's going on in the lyrics.
+
+As Mika describes this very dark but profound portrayal of love being something where you give till it's all that you have and you know nothing is fair in death and romance. Till death do us part in so many words. Musically and structurally "Fear, Sex" is a quick interlude moment that is passable for the most part, though I do think it does add some interesting narrative and conspiratorial layers to the record as Mika describes dirty baskets putting wires in someone's head, which I think sets things up for the dark narrative turn that follows on "Vampire in the Corner", which has one of the cutest chord and melody combos on the entire record.
+
+I also love hearing Mika's voice in this much more hushed, intimate setting. Her vocals are so quiet but so sweet and expressive, too. The whole song describes a desire for love in a sense, but also feeling too weird and off-putting and maybe too into the love that you're interested to actually achieve it. There's a want, there's a need there, but simultaneously, there's also this disorienting blockage in the way that is difficult to describe. The whole track comes to this really huge, confusing, and almost abrasive crescendo of sounds. It sounds like hearing 200 kazooz going off at once. It's an absolutely insane display of layers for sure.
+
+Following this, "Watching T.V.", I'm just a bit torn on, though, as I think the progressive ever-changing structure of the track keeps very little of what goes on in the first leg from sticking all that much. However, the ending crescendo on the track is incredible and does bring back those prog vibes in a big way. Lyrically, I do think this song is a great contrast from a lot of the bright and utopian imagery that is brought in the first leg of songs on the record, as Mika says very directly on the song that it's a time to meet the monsters inside you.
+
+And this track quickly segues not just sonically, but narratively, too, into the following "Tunnel Vision", which is this track that's built on these very cute indie-tronic beats and quaint synthesizer
+</referencia_2>
+
+### PEDIDO
+
+Escreva a review do perfil abaixo, como se o gosto musical dessa pessoa fosse o álbum.
+Idioma da resposta: português do Brasil.
+
+<perfil_lastfm>
+{
+  "usuario": "almikiwi",
+  "periodo_analisado": "12month",
+  "scrobbles_totais": 70036,
+  "anos_de_conta": 6.2,
+  "scrobbles_por_dia_media": 30.9,
+  "concentracao_no_top50_do_periodo": {
+    "top1_pct": 6.0,
+    "top5_pct": 24.1,
+    "top10_pct": 42.0,
+    "artistas_efetivos": 42.1,
+    "obs": "artistas_efetivos ~ quantos artistas 'de verdade' sustentam a escuta (50 = tudo igualmente dividido; 1 = um artista domina tudo)"
+  },
+  "top_artistas": [
+    {
+      "nome": "Magdalena Bay",
+      "plays": 405
+    },
+    {
+      "nome": "Arctic Monkeys",
+      "plays": 332
+    },
+    {
+      "nome": "L'Impératrice",
+      "plays": 303
+    },
+    {
+      "nome": "Viagra Boys",
+      "plays": 303
+    },
+    {
+      "nome": "Charli xcx",
+      "plays": 279
+    },
+    {
+      "nome": "Queens of the Stone Age",
+      "plays": 278
+    },
+    {
+      "nome": "The Strokes",
+      "plays": 259
+    },
+    {
+      "nome": "Slomosa",
+      "plays": 253
+    },
+    {
+      "nome": "Olivia Rodrigo",
+      "plays": 206
+    },
+    {
+      "nome": "Lady Gaga",
+      "plays": 202
+    },
+    {
+      "nome": "Deftones",
+      "plays": 174
+    },
+    {
+      "nome": "Justice",
+      "plays": 167
+    },
+    {
+      "nome": "Placebo",
+      "plays": 166
+    },
+    {
+      "nome": "Nu Genea",
+      "plays": 163
+    },
+    {
+      "nome": "The Lemon Twigs",
+      "plays": 156
+    }
+  ],
+  "mainstream_vs_nicho": {
+    "pct_plays_em_artistas_gigantes_(3M+_ouvintes)": 46.6,
+    "pct_plays_em_artistas_de_nicho_(<150k_ouvintes)": 9.1,
+    "ouvintes_mediana": 2255625,
+    "mais_obscuros": [
+      {
+        "nome": "The Parcels",
+        "ouvintes_lastfm": 3434
+      },
+      {
+        "nome": "Slomosa",
+        "ouvintes_lastfm": 66905
+      },
+      {
+        "nome": "Nu Genea",
+        "ouvintes_lastfm": 199728
+      }
+    ],
+    "mais_populares": [
+      {
+        "nome": "Lady Gaga",
+        "ouvintes_lastfm": 8001092
+      },
+      {
+        "nome": "Arctic Monkeys",
+        "ouvintes_lastfm": 7378956
+      },
+      {
+        "nome": "Madonna",
+        "ouvintes_lastfm": 5926074
+      }
+    ],
+    "obs": "calculado sobre os 20 artistas mais ouvidos"
+  },
+  "generos_dominantes": [
+    {
+      "tag": "rock",
+      "pct": 6.8
+    },
+    {
+      "tag": "alternative",
+      "pct": 6.7
+    },
+    {
+      "tag": "electronic",
+      "pct": 6.1
+    },
+    {
+      "tag": "synthpop",
+      "pct": 5.6
+    },
+    {
+      "tag": "alternative rock",
+      "pct": 5.1
+    },
+    {
+      "tag": "pop",
+      "pct": 4.7
+    },
+    {
+      "tag": "indie",
+      "pct": 4.5
+    },
+    {
+      "tag": "indie pop",
+      "pct": 3.7
+    },
+    {
+      "tag": "indie rock",
+      "pct": 3.6
+    },
+    {
+      "tag": "funk",
+      "pct": 3.0
+    },
+    {
+      "tag": "stoner rock",
+      "pct": 2.6
+    },
+    {
+      "tag": "dance",
+      "pct": 2.4
+    }
+  ],
+  "faixas": {
+    "top": [
+      {
+        "faixa": "Love Spreads",
+        "artista": "The Stone Roses",
+        "plays": 35
+      },
+      {
+        "faixa": "Voodoo?",
+        "artista": "L'Impératrice",
+        "plays": 31
+      },
+      {
+        "faixa": "Human Happens",
+        "artista": "Magdalena Bay",
+        "plays": 31
+      },
+      {
+        "faixa": "Pyramid of Health",
+        "artista": "Viagra Boys",
+        "plays": 31
+      },
+      {
+        "faixa": "Image",
+        "artista": "Magdalena Bay",
+        "plays": 30
+      },
+      {
+        "faixa": "Death & Romance",
+        "artista": "Magdalena Bay",
+        "plays": 29
+      },
+      {
+        "faixa": "Séquences - Parcels Remix",
+        "artista": "L'Impératrice",
+        "plays": 27
+      },
+      {
+        "faixa": "Lightenup",
+        "artista": "Parcels",
+        "plays": 26
+      },
+      {
+        "faixa": "Ocean Man",
+        "artista": "Ween",
+        "plays": 26
+      },
+      {
+        "faixa": "360",
+        "artista": "Charli xcx",
+        "plays": 25
+      }
+    ],
+    "faixa_n1_vezes_a_mediana_do_top10": 1.2,
+    "artista_com_mais_faixas_no_top50": [
+      "Viagra Boys",
+      7
+    ]
+  },
+  "albuns_top": [
+    {
+      "album": "viagr aboys",
+      "artista": "Viagra Boys",
+      "plays": 222
+    },
+    {
+      "album": "Imaginal Disk",
+      "artista": "Magdalena Bay",
+      "plays": 219
+    },
+    {
+      "album": "Whatever People Say I Am, That's What I'm Not",
+      "artista": "Arctic Monkeys",
+      "plays": 145
+    },
+    {
+      "album": "you seem pretty sad for a girl so in love",
+      "artista": "Olivia Rodrigo",
+      "plays": 128
+    },
+    {
+      "album": "Tundra Rock",
+      "artista": "Slomosa",
+      "plays": 126
+    },
+    {
+      "album": "Slomosa",
+      "artista": "Slomosa",
+      "plays": 119
+    },
+    {
+      "album": "moisturizer",
+      "artista": "Wet Leg",
+      "plays": 113
+    },
+    {
+      "album": "Humbug",
+      "artista": "Arctic Monkeys",
+      "plays": 104
+    },
+    {
+      "album": "Mercurial World",
+      "artista": "Magdalena Bay",
+      "plays": 102
+    },
+    {
+      "album": "NEVER ENOUGH",
+      "artista": "Turnstile",
+      "plays": 102
+    }
+  ],
+  "escuta_recente": {
+    "ultimos_plays_analisados": 200,
+    "artistas_distintos": 50,
+    "top_artistas_recentes": [
+      {
+        "nome": "Delta Sleep",
+        "plays": 25
+      },
+      {
+        "nome": "Justice",
+        "plays": 20
+      },
+      {
+        "nome": "Nu Genea",
+        "plays": 19
+      },
+      {
+        "nome": "Parcels",
+        "plays": 13
+      },
+      {
+        "nome": "AJJ",
+        "plays": 12
+      }
+    ],
+    "pct_plays_fora_do_top50_do_periodo": 57.5,
+    "faixa_mais_repetida": {
+      "faixa": "Lake Sprinkle Sprankle",
+      "artista": "Delta Sleep",
+      "vezes": 2
+    }
+  }
+}
+</perfil_lastfm>

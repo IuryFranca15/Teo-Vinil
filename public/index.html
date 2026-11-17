@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ef2439"><title>Teo Vinil — Last.fm Review</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:#171717;background:#f5f2ed}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 12% 10%,#ffd5d8 0,transparent 30%),#f5f2ed}
+.shell{width:min(100%,980px);display:grid;grid-template-columns: .92fr 1.08fr;background:#fff;border:1px solid #e6e0d9;border-radius:28px;overflow:hidden;box-shadow:0 24px 80px #2c1b1b1c}
+.hero{background:#ef2439;color:#fff;padding:38px;display:flex;flex-direction:column;justify-content:space-between;min-height:680px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:360px;height:360px;border:1px solid #ffffff38;border-radius:50%;right:-180px;bottom:-130px;box-shadow:0 0 0 35px #ffffff0c,0 0 0 70px #ffffff0c}
+.photo{width:min(100%,330px);aspect-ratio:1;object-fit:cover;border-radius:22px;border:5px solid #fff;box-shadow:0 14px 35px #690c1b44;align-self:center}
+.kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;opacity:.85}
+.hero h1{font-size:clamp(38px,5vw,58px);line-height:.98;letter-spacing:-.06em;margin:22px 0 12px}
+.hero p{font-size:16px;line-height:1.55;max-width:350px;color:#ffe8ea}
+.stamp{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;margin-top:36px}
+.content{padding:48px clamp(24px,5vw,58px);display:flex;flex-direction:column;justify-content:center}
+.content h2{font-size:clamp(28px,3.5vw,40px);line-height:1.05;letter-spacing:-.05em;margin:0 0 12px}
+.sub{color:#706a67;line-height:1.55;margin:0 0 30px}
+label{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:18px 0 8px}
+input,select{width:100%;border:1px solid #ded9d3;background:#fbfaf8;border-radius:12px;padding:15px 14px;font:inherit;outline:none}
+input:focus,select:focus{border-color:#ef2439;box-shadow:0 0 0 3px #ef24391c}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{border:0;border-radius:12px;background:#171717;color:white;padding:16px 20px;font:inherit;font-weight:800;cursor:pointer;margin-top:26px;transition:.2s}
+button:hover{background:#ef2439;transform:translateY(-1px)}button:disabled{opacity:.55;cursor:wait;transform:none}
+.hint{font-size:12px;color:#827b76;line-height:1.5;margin-top:12px}
+.status{display:none;margin-top:18px;padding:14px;border-radius:12px;background:#fff2f1;color:#8f1e2b;font-size:14px;line-height:1.5;white-space:pre-wrap}
+.result{display:none;margin-top:28px;border-top:1px solid #e9e4df;padding-top:24px}
+.result h3{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#ef2439}
+.review{white-space:pre-wrap;line-height:1.75;color:#292523}
+@media(max-width:760px){body{padding:12px}.shell{grid-template-columns:1fr}.hero{min-height:unset;padding:26px}.photo{width:min(68%,250px);margin:24px auto 8px}.hero h1{font-size:42px}.stamp{margin-top:20px}.content{padding:34px 24px}}
+@media(max-width:420px){.grid{grid-template-columns:1fr}}
+</style></head>
+<body><main class="shell">
+<section class="hero">
+ <div><div class="kicker">The internet's least patient music nerd</div>
+ <img class="photo" src="/teo-vinil.png" alt="Teo Vinil olhando diretamente para a câmera">
+ <h1>TEO<br>VINIL.</h1>
+ <p>One profile. A lifetime of questionable listening decisions. Let's talk about your taste.</p></div>
+ <div class="stamp">Last.fm taste review · Est. whenever</div>
+</section>
+<section class="content">
+ <h2>Hey, what's up?</h2>
+ <p class="sub">Hurry up and give me your Last.fm API key. And your username. I have opinions to deliver.</p>
+ <form id="form">
+  <label for="username">Last.fm username</label>
+  <input id="username" name="username" placeholder="Your Last.fm username" autocomplete="username" required maxlength="80">
+  <label for="apiKey">Last.fm API key</label>
+  <input id="apiKey" name="apiKey" placeholder="Paste your API key here" required maxlength="300" autocomplete="off">
+  <div class="grid">
+   <div><label for="period">Listening period</label><select id="period"><option value="overall">All time</option><option value="12month">Last 12 months</option><option value="6month">Last 6 months</option><option value="3month">Last 3 months</option><option value="1month">Last month</option><option value="7day">Last 7 days</option></select></div>
+   <div><label for="language">Review language</label><select id="language"><option>Português do Brasil</option><option>English</option><option>Español</option></select></div>
+  </div>
+  <button id="submit" type="submit">Roast my music taste →</button>
+  <p class="hint">Your API key is sent only to this site's backend to request public Last.fm profile data. It is not added to the AI prompt or saved by this page. Use your API key — never your Last.fm password or account credentials.</p>
+ </form>
+ <div id="status" class="status" role="status"></div>
+ <section id="result" class="result"><h3 id="resultTitle">Your review</h3><div id="review" class="review"></div></section>
+</section></main>
+<script>
+const form=document.querySelector('#form'),button=document.querySelector('#submit'),statusBox=document.querySelector('#status'),result=document.querySelector('#result');
+form.addEventListener('submit',async e=>{
+ e.preventDefault();button.disabled=true;button.textContent='Listening to your data…';statusBox.style.display='block';statusBox.textContent='Fetching your Last.fm profile and asking Teo for a verdict.';result.style.display='none';
+ try{
+  const requestBody=JSON.stringify({username:form.username.value,apiKey:form.apiKey.value,period:document.querySelector('#period').value,language:document.querySelector('#language').value});
+  form.apiKey.value='';
+  const response=await fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:requestBody});
+  const data=await response.json();if(!response.ok)throw new Error(data.error||'Something went wrong.');
+  statusBox.style.display='none';document.querySelector('#resultTitle').textContent=`The ${data.period} review for ${data.username}`;document.querySelector('#review').textContent=data.review;result.style.display='block';result.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(err){statusBox.textContent=err.message}
+ finally{button.disabled=false;button.textContent='Roast my music taste →'}
+});
+</script></body></html>
