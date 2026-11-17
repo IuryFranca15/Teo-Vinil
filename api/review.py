@@ -3,6 +3,7 @@ import os
 import sys
 import urllib.request
 import urllib.error
+import urllib.parse
 from http.server import BaseHTTPRequestHandler
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,33 +47,42 @@ class handler(BaseHTTPRequestHandler):
             profile = build_profile(raw)
             system_prompt, user_prompt = build_prompt(profile, lang)
 
-            ollama_api_key = os.environ.get("OLLAMA_API_KEY", "").strip()
-            model = os.environ.get("OLLAMA_MODEL", "gpt-oss:120b").strip()
-            if not ollama_api_key:
+            gemini_api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+            model = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip()
+            if not gemini_api_key:
                 return self._send(503, {
-                    "error": "O Ollama Cloud ainda não foi configurado. Defina OLLAMA_API_KEY nas variáveis da Vercel."
+                    "error": "O Gemini ainda não foi configurado. Defina GEMINI_API_KEY nas variáveis da Vercel."
                 })
+
             payload = json.dumps({
-                "model": model,
-                "stream": False,
-                "messages": [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                "options": {"temperature": 0.75, "num_predict": 2800}
-            }).encode("utf-8")
-            req = urllib.request.Request(
-                "https://ollama.com/api/chat", data=payload, method="POST",
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + ollama_api_key
+                "systemInstruction": {"parts": [{"text": system_prompt}]},
+                "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
+                "generationConfig": {
+                    "temperature": 0.75,
+                    "maxOutputTokens": 2800
                 }
+            }).encode("utf-8")
+            endpoint = (
+                "https://generativelanguage.googleapis.com/v1beta/models/"
+                + model + ":generateContent?key=" + urllib.parse.quote(gemini_api_key, safe="")
+            )
+            req = urllib.request.Request(
+                endpoint, data=payload, method="POST",
+                headers={"Content-Type": "application/json"}
             )
             with urllib.request.urlopen(req, timeout=240) as response:
                 result = json.loads(response.read().decode("utf-8"))
-            review = result.get("message", {}).get("content", "").strip()
+
+            candidates = result.get("candidates", [])
+            parts = candidates[0].get("content", {}).get("parts", []) if candidates else []
+            review = "\n".join(
+                part.get("text", "") for part in parts if part.get("text")
+            ).strip()
             if not review:
-                return self._send(502, {"error": "O Ollama respondeu sem texto."})
+                feedback = candidates[0].get("finishReason", "sem detalhes") if candidates else "sem candidatos"
+                return self._send(502, {
+                    "error": "O Gemini não retornou uma resenha em texto (" + str(feedback) + "). Tente novamente."
+                })
             return self._send(200, {
                 "username": profile.get("usuario"),
                 "period": period,
@@ -83,7 +93,15 @@ class handler(BaseHTTPRequestHandler):
             return self._send(422, {"error": "Last.fm: " + str(exc)})
         except urllib.error.HTTPError as exc:
             detail = exc.read().decode("utf-8", "replace")[:500]
-            return self._send(502, {"error": "Erro ao consultar o Ollama Cloud: HTTP %s — %s" % (exc.code, detail)})
+            if exc.code == 429:
+                message = "Limite gratuito do Gemini atingido. Aguarde a renovação da cota e tente novamente."
+            elif exc.code == 403:
+                message = "O Gemini recusou a chave ou o acesso ao modelo. Confira GEMINI_API_KEY e o projeto no Google AI Studio."
+            elif exc.code == 400:
+                message = "O Gemini rejeitou a solicitação. Verifique o modelo e os dados enviados."
+            else:
+                message = "Erro ao consultar o Gemini: HTTP %s — %s" % (exc.code, detail)
+            return self._send(502, {"error": message})
         except Exception as exc:
             return self._send(500, {"error": "Falha ao gerar a review: " + str(exc)[:400]})
 

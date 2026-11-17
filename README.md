@@ -1,5 +1,5 @@
 # Teo Vinil — Last.fm Critic
 
-Aplicação web com frontend estático, backend Python na Vercel e geração de reviews pelo Ollama Cloud.
+Aplicação web com frontend estático, backend Python na Vercel e geração de reviews pela API Gemini Flash.
 
-Consulte `README_DEPLOY.md` para instruções de configuração e publicação.
+Consulte `README_DEPLOY.md` para configurar a chave do Gemini e publicar.
