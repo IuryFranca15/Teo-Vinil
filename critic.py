@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""lastfm-critic v1
+"""lastfm-critic v4
 
 Lê o perfil de alguém no Last.fm, calcula métricas do gosto musical e pede a um
-modelo (Claude) para escrever uma "review" falada do perfil, no tom definido em
-persona.md. Só usa a biblioteca padrão do Python.
+modelo gratuito do Google Gemini para escrever uma "review" falada do perfil,
+no tom definido em persona.md. Só usa a biblioteca padrão do Python.
 
 Uso:
   export LASTFM_API_KEY=...        # https://www.last.fm/api/account/create
-  export ANTHROPIC_API_KEY=...     # https://console.anthropic.com
+  export GEMINI_API_KEY=...        # https://aistudio.google.com/apikey (grátis)
   python3 critic.py SEU_USUARIO --period 6month
 
   python3 critic.py --demo --dry-run   # sem chaves: mostra métricas e prompt
@@ -29,8 +29,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 LASTFM_URL = "https://ws.audioscrobbler.com/2.0/"
-ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
-DEFAULT_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5")
+GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
 PERIODS = ["overall", "7day", "1month", "3month", "6month", "12month"]
 CACHE_TTL = 6 * 3600
 THROTTLE = 0.2  # pausa entre chamadas ao Last.fm (a API web reduz isso)
@@ -253,44 +253,69 @@ def build_prompt(profile, lang):
     persona = (HERE / "persona.md").read_text(encoding="utf-8")
     examples = load_examples()
     system = persona
+
+    # Calibragem explícita de notas e polarização alinhada ao persona.md
+    system += (
+        "\n\n# Calibragem Obrigatória de Notas e Polarização\n"
+        "ATENÇÃO: Evite o vício de ficar em cima do muro dando sempre notas 7, 7.5 ou 8. "
+        "A distribuição das suas notas precisa flutuar de verdade de acordo com a ousadia e o repertório do perfil:\n"
+        "- NOTAS ABAIXO DE 5 (ou 'NOT GOOD' / 2, 3, 4): Se o perfil for comum, genérico, dominado por mainstream "
+        "pasteurizado de algoritmo (ex: Imagine Dragons, Coldplay recente, Gracie Abrams) ou uma bagunça sem identidade, "
+        "NÃO amacie a nota. Dê nota baixa (abaixo de 5 ou Not Good) e desça a lenha com humor ácido.\n"
+        "- NOTAS 6 A 7.5 (O Padrão/Seguro): Reserve essa faixa exclusivamente para perfis 'ok', indie standard ou "
+        "pop/rock competente mas previsível, sem grandes riscos. Seja irônico e aponte a falta de ousadia.\n"
+        "- NOTAS 8 A 10 (Evento Raro / Masterpiece): Reserve notas 8, 9 e 10 APENAS para perfis genuinamente "
+        "encorpados, coesos, com curadoria forte, mergulho em nicho aclamado pela crítica ou artistas de muita "
+        "personalidade (como Geese, The Velvet Underground, Pixies, Magdalena Bay, etc.). Quando encontrar um perfil assim, "
+        "elogie sem medo e rasgue seda.\n"
+        "Nunca misture elogio e ressalva só por educação: se o perfil merecer ser destruído, destrua; se merecer ser exaltado, exalte."
+    )
+
     if examples:
         refs = "\n\n".join(f"<referencia_{i+1}>\n{e}\n</referencia_{i+1}>" for i, e in enumerate(examples))
         system += (
             "\n\n# Textos de referência (só para o RITMO e a ESTRUTURA)\n"
             "Os textos abaixo são reviews de álbuns, de outra pessoa, em inglês. Estude a cadência, "
-            "como a opinião é dosada com ressalvas, como as observações específicas sustentam o veredito "
-            "e como o texto fecha com nota. NÃO copie frases, nomes, bordões ou aberturas deles, e não "
-            "mencione que eles existem.\n\n" + refs
+            "a variação de tom entre o entusiasmo extremo (notas 9-10) e a demolição ácida (Not Good), "
+            "como as observações específicas sustentam o veredito e como o texto fecha com nota. "
+            "NÃO copie frases, nomes, bordões ou aberturas deles, e não mencione que eles existem.\n\n" + refs
         )
+
     user = (
         f"Escreva a review do perfil abaixo, como se o gosto musical dessa pessoa fosse o álbum.\n"
-        f"Idioma da resposta: {lang}.\n\n"
+        f"Idioma da resposta: {lang}.\n"
+        f"Lembre-se: calibre a nota com rigor — não dê 7 ou 8 por padrão se o perfil for genérico ou comum.\n\n"
         f"<perfil_lastfm>\n{json.dumps(profile, ensure_ascii=False, indent=2)}\n</perfil_lastfm>"
     )
     return system, user
 
 
-def call_claude(system, user, model, max_tokens=2500):
-    key = os.environ.get("ANTHROPIC_API_KEY")
+def call_gemini(system, user, model, max_tokens=2800):
+    key = os.environ.get("GEMINI_API_KEY")
     if not key:
-        raise SystemExit("Defina ANTHROPIC_API_KEY (ou use --dry-run).")
+        raise SystemExit("Defina GEMINI_API_KEY (grátis em https://aistudio.google.com/apikey) ou use --dry-run.")
+    url = GEMINI_API_URL.format(model=urllib.parse.quote(model, safe=""))
     body = json.dumps({
-        "model": model, "max_tokens": max_tokens, "system": system,
-        "messages": [{"role": "user", "content": user}],
+        "system_instruction": {"parts": [{"text": system}]},
+        "contents": [{"role": "user", "parts": [{"text": user}]}],
+        "generationConfig": {"temperature": 0.8, "maxOutputTokens": max_tokens},
     }).encode("utf-8")
     req = urllib.request.Request(
-        ANTHROPIC_URL, data=body, method="POST",
-        headers={"x-api-key": key, "anthropic-version": "2023-06-01",
-                 "content-type": "application/json"},
+        url, data=body, method="POST",
+        headers={"x-goog-api-key": key, "content-type": "application/json"},
     )
     try:
         with urllib.request.urlopen(req, timeout=180) as resp:
             data = json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
-        raise SystemExit(f"Erro da API da Anthropic ({e.code}): {e.read().decode('utf-8', 'replace')}")
+        raise SystemExit(f"Erro da API do Gemini ({e.code}): {e.read().decode('utf-8', 'replace')}")
     except urllib.error.URLError as e:
-        raise SystemExit(f"Sem conexão com a API da Anthropic: {e.reason}")
-    return "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text").strip()
+        raise SystemExit(f"Sem conexão com a API do Gemini: {e.reason}")
+    candidates = data.get("candidates", [])
+    if not candidates:
+        return ""
+    parts = candidates[0].get("content", {}).get("parts", [])
+    return "".join(p.get("text", "") for p in parts).strip()
 
 
 # -------------------------------------------------------------------- demo ---
@@ -347,10 +372,10 @@ def main():
     ap.add_argument("--details", type=int, default=20,
                     help="quantos artistas consultar em artist.getInfo (gêneros/popularidade)")
     ap.add_argument("--no-cache", action="store_true")
-    ap.add_argument("--dry-run", action="store_true", help="mostra perfil e prompt, não chama o Claude")
+    ap.add_argument("--dry-run", action="store_true", help="mostra perfil e prompt, não chama a IA")
     ap.add_argument("--demo", action="store_true", help="usa dados fictícios, sem chave do Last.fm")
     ap.add_argument("--save-prompt", action="store_true",
-                    help="grava o prompt completo em prompt.txt para colar em qualquer chat (sem API da Anthropic)")
+                    help="grava o prompt completo em prompt.txt para colar em qualquer chat gratuito")
     ap.add_argument("--out", help="arquivo de saída (padrão: reviews/<user>_<periodo>_<data>.md)")
     args = ap.parse_args()
 
@@ -378,7 +403,7 @@ def main():
             encoding="utf-8",
         )
         print(f"Prompt salvo em {out}\nAbra o arquivo, copie tudo e cole num chat "
-              f"(Claude, ChatGPT, Gemini...).")
+              f"(Gemini, ChatGPT, Claude...).")
         return
 
     if args.dry_run:
@@ -387,7 +412,7 @@ def main():
         print(f"\n=== PROMPT: system={len(system)} chars, user={len(user)} chars ===")
         return
 
-    review = call_claude(system, user, args.model)
+    review = call_gemini(system, user, args.model)
     print(review)
 
     out = Path(args.out) if args.out else HERE / "reviews" / f"{profile['usuario']}_{profile['periodo_analisado']}_{date.today()}.md"
