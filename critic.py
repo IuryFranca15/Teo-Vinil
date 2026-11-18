@@ -33,6 +33,7 @@ ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 DEFAULT_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5")
 PERIODS = ["overall", "7day", "1month", "3month", "6month", "12month"]
 CACHE_TTL = 6 * 3600
+THROTTLE = 0.2  # pausa entre chamadas ao Last.fm (a API web reduz isso)
 
 # tags que não dizem nada sobre som/gênero
 STOP_TAGS = {
@@ -93,7 +94,7 @@ class LastFM:
             raise LastFMError(f"{method}: {data.get('message', data['error'])}")
         if self.use_cache:
             cache_file.write_text(json.dumps(data))
-        time.sleep(0.2)  # educação com a API
+        time.sleep(THROTTLE)  # educação com a API
         return data
 
 

@@ -25,6 +25,15 @@ A faixa gratuita pode ter condições de uso de dados diferentes da faixa paga. 
 ## 4. Dados do Last.fm
 A API key do Last.fm é enviada pelo navegador à função `/api/review`, usada apenas para consultar o Last.fm. Ela não é incluída no prompt enviado ao Gemini nem devolvida na resposta. Não solicite senha do Last.fm nem Shared Secret.
 
+## 4b. Erros 503 e 429 (como o site se protege)
+O 503 "high demand" é falta de capacidade do lado do Google e costuma ser passageiro. A função `/api/review` agora:
+1. tenta o mesmo modelo 2 vezes em erros temporários (429, 500, 502, 503, 504);
+2. passa para o próximo modelo da lista `GEMINI_MODELS` (padrão: `gemini-3.8-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite`; confira os nomes e a cota gratuita em https://ai.google.dev/gemini-api/docs/models);
+3. se configurado, usa um provedor de reserva com API estilo OpenAI (`FALLBACK_BASE_URL`, `FALLBACK_API_KEY`, `FALLBACK_MODEL`, por exemplo Groq ou OpenRouter; confira limites gratuitos);
+4. se tudo falhar, a resposta traz o prompt pronto e o site mostra o botão **Copy prompt**, para o visitante colar em qualquer chat.
+
+Variáveis opcionais: `GEMINI_MODELS`, `FALLBACK_BASE_URL`, `FALLBACK_API_KEY`, `FALLBACK_MODEL`, `LASTFM_API_KEY` (usada se o visitante não enviar chave) e `TIME_BUDGET` (segundos, padrão 54, abaixo do limite de 60 da função).
+
 ## 5. Observações
 - Não é necessário instalar Ollama nem qualquer modelo no computador.
 - A Vercel Hobby também possui limites próprios de execução e uso.

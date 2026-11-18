@@ -55,19 +55,28 @@ button:hover{background:#ef2439;transform:translateY(-1px)}button:disabled{opaci
   <p class="hint">Your API key is sent only to this site's backend to request public Last.fm profile data. It is not added to the AI prompt or saved by this page. Use your API key — never your Last.fm password or account credentials.</p>
  </form>
  <div id="status" class="status" role="status"></div>
+ <div id="fallback" class="status" style="display:none"></div>
  <section id="result" class="result"><h3 id="resultTitle">Your review</h3><div id="review" class="review"></div></section>
 </section></main>
 <script>
-const form=document.querySelector('#form'),button=document.querySelector('#submit'),statusBox=document.querySelector('#status'),result=document.querySelector('#result');
+const form=document.querySelector('#form'),button=document.querySelector('#submit'),statusBox=document.querySelector('#status'),result=document.querySelector('#result'),fallbackBox=document.querySelector('#fallback');
+function showFallback(prompt){
+ if(!prompt)return;
+ fallbackBox.textContent='';
+ const p=document.createElement('p');p.textContent='Want your review right now anyway? Copy the ready-made prompt and paste it into Claude, ChatGPT or Gemini (app or website).';
+ const b=document.createElement('button');b.type='button';b.textContent='Copy prompt';
+ b.onclick=async()=>{try{await navigator.clipboard.writeText(prompt)}catch(_){const t=document.createElement('textarea');t.value=prompt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}b.textContent='Copied ✓'};
+ fallbackBox.append(p,b);fallbackBox.style.display='block';
+}
 form.addEventListener('submit',async e=>{
- e.preventDefault();button.disabled=true;button.textContent='Listening to your data…';statusBox.style.display='block';statusBox.textContent='Fetching your Last.fm profile and asking Teo for a verdict.';result.style.display='none';
+ e.preventDefault();fallbackBox.style.display='none';button.disabled=true;button.textContent='Listening to your data…';statusBox.style.display='block';statusBox.textContent='Fetching your Last.fm profile and asking Teo for a verdict.';result.style.display='none';
  try{
   const requestBody=JSON.stringify({username:form.username.value,apiKey:form.apiKey.value,period:document.querySelector('#period').value,language:document.querySelector('#language').value});
   form.apiKey.value='';
   const response=await fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:requestBody});
-  const data=await response.json();if(!response.ok)throw new Error(data.error||'Something went wrong.');
+  const data=await response.json();if(!response.ok){const er=new Error(data.error||'Something went wrong.');er.prompt=data.prompt||'';throw er}
   statusBox.style.display='none';document.querySelector('#resultTitle').textContent=`The ${data.period} review for ${data.username}`;document.querySelector('#review').textContent=data.review;result.style.display='block';result.scrollIntoView({behavior:'smooth',block:'start'});
- }catch(err){statusBox.textContent=err.message}
+ }catch(err){statusBox.textContent=err.message;showFallback(err.prompt)}
  finally{button.disabled=false;button.textContent='Roast my music taste →'}
 });
 </script></body></html>
